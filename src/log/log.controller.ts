@@ -12,6 +12,6 @@ export class LogController {
   @UseGuards(AuthGuard('jwt'))
   async list(@Req() req) {
     let id = req.user.id
-    return await this.logService.list(req.user.id)
+    return await this.logService.list(req.user)
   }
 }

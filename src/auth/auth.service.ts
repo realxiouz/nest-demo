@@ -15,7 +15,7 @@ export class AuthService {
   async login(user: any){
     await this.logService.create({
       type: Action.LOGIN,
-      uId: user
+      uId: user._id
     })
     // let d = this.jwtService.verify('1',{
     //   secret: 'hello-world'
@@ -24,6 +24,22 @@ export class AuthService {
     return {
       token: this.jwtService.sign(user.id)
     }
+  }
+
+  validateJwt(token: string) {
+    let r
+    try {
+      r = this.jwtService.verify(token.split(' ')[1], {
+        secret: 'hello-world'
+      })
+      return r
+    } catch(e) {
+      return {
+        message: 'err',
+        data: e
+      }
+    }
+    
   }
 
   // async profile(id: string) {

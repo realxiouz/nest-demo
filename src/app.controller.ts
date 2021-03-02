@@ -1,4 +1,4 @@
-import { Controller, Get, Ip, Param, Post, Query, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Ip, Param, Post, Query, UseGuards, Request, Headers, Req } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiParam, ApiProperty, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { query } from 'express';
@@ -40,5 +40,15 @@ export class AppController {
   @Get('test/users')
   async uses(@Request() req) {
     return await this.userService.getList()
+  }
+
+  @Get('test/validateJwt')
+  async testValidteJwt(@Headers('Authorization') token: string) {
+    return this.authService.validateJwt(token)
+  }
+
+  @Get('test/userMiddleware')
+  async userMiddleware(@Request() req) {
+    return req.uid
   }
 }

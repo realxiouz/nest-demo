@@ -15,7 +15,7 @@ export class LogService {
   }
 
   async list(uId){
-    return await this.logModel.find().exec()
-    // return await this.logModel.find({uId}).populate('User').exec()
+    // return await this.logModel.find({}).exec()
+    return await this.logModel.find().populate('user').exec()
   }
 }
