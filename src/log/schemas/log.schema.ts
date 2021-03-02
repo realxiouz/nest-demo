@@ -18,8 +18,8 @@ export class Log {
   @Prop({type: Date, default: Date.now()})
   time?: Date
 
-  @Prop({ref: _ => 'User', type: Types._ObjectId})
-  uId: User
+  @Prop({ref: _ => User, type: Types._ObjectId})
+  uId: string
 
   @Prop(
     { select: true }

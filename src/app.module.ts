@@ -1,12 +1,12 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose'
 import { LogModule } from './log/log.module';
+import { UserMiddleware } from './common/middleware/user.middleware';
 // import { mongoose } from '@typegoose/typegoose' 
-
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost/shop'),
@@ -16,7 +16,14 @@ import { LogModule } from './log/log.module';
   ],
   providers: [AppService],
   controllers: [
-    AppController
+    AppController,
   ]
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  
+  configure(con: MiddlewareConsumer) {
+    con.apply(
+      UserMiddleware,
+    )
+  }
+}

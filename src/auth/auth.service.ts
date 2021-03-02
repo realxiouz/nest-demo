@@ -17,6 +17,10 @@ export class AuthService {
       type: Action.LOGIN,
       uId: user
     })
+    // let d = this.jwtService.verify('1',{
+    //   secret: 'hello-world'
+    // })
+    // console.log(d)
     return {
       token: this.jwtService.sign(user.id)
     }
