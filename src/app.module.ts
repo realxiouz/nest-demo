@@ -6,10 +6,19 @@ import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose'
 import { LogModule } from './log/log.module';
 import { UserMiddleware } from './common/middleware/user.middleware';
+import { ConfigModule } from '@nestjs/config'
 // import { mongoose } from '@typegoose/typegoose' 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/shop'),
+    ConfigModule.forRoot(),
+    MongooseModule.forRootAsync({
+      useFactory() {
+        return {
+          uri: process.env.MONGO_RUI,
+          pass: process.env.MONGO_PASS,
+        }
+      }
+    }),
     UserModule,
     AuthModule,
     LogModule,
