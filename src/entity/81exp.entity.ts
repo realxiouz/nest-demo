@@ -38,6 +38,9 @@ export class Exp {
     })
     user: BzUser
 
+    @Column()
+    uid: number
+
     // @ManyToOne(_ => BzUser)
     // user: BzUser
 }

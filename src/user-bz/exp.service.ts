@@ -13,4 +13,10 @@ export class ExpService {
   async all() {
     return await this.expRep.find({relations: ['user']})
   }
+
+  async createExp() {
+    let exp: Exp = new Exp()
+    exp.uid = 1
+    return await this.expRep.save(exp)
+  }
 }

@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Third } from "./81third.entity";
 
 export enum UserType {
   NORMAL = 0,
@@ -93,4 +94,8 @@ export class BzUser {
 
   @Column()
   updated_at: number
+
+  @OneToMany(_ => Third,  third => third.user)
+  // @JoinColumn()
+  third: Third[]
 }
