@@ -7,7 +7,10 @@ import { MongooseModule } from '@nestjs/mongoose'
 import { LogModule } from './log/log.module';
 import { UserMiddleware } from './common/middleware/user.middleware';
 import { ConfigModule } from '@nestjs/config'
+import { TypeOrmModule } from '@nestjs/typeorm';
+import * as path from 'path';
 // import { mongoose } from '@typegoose/typegoose' 
+import { UserBzModule } from './user-bz/user-bz.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -19,9 +22,23 @@ import { ConfigModule } from '@nestjs/config'
         }
       }
     }),
+    TypeOrmModule.forRootAsync({
+      useFactory() {
+        return {
+          type: 'mysql',
+          host: process.env.MYSQL_HOST,
+          port: parseInt(process.env.MYSQL_PORT),
+          username: process.env.MYSQL_USER_NAME,
+          password: process.env.MYSQL_PASSWORD,
+          entities: [ path.join(__dirname, './entity/*.entity{.ts,.js}') ],
+          database: '81_shop'
+        }
+      }
+    }),
     UserModule,
     AuthModule,
     LogModule,
+    UserBzModule,
   ],
   providers: [AppService],
   controllers: [
