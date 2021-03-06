@@ -34,7 +34,7 @@ export class Exp {
     @ManyToOne(_ => BzUser)
     @JoinColumn({
       name: 'uid',
-      referencedColumnName: 'id'
+      referencedColumnName: 'uid'
     })
     user: BzUser
 

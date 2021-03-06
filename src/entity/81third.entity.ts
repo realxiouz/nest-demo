@@ -24,7 +24,8 @@ export class Third {
 
   @ManyToOne(_ => BzUser, user => user.third)
   @JoinColumn({
-    name: 'uid'
+    name: 'uid',
+    referencedColumnName: 'uid'
   })
   user: BzUser
 }

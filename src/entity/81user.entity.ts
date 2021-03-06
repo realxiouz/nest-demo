@@ -96,6 +96,9 @@ export class BzUser {
   updated_at: number
 
   @OneToMany(_ => Third,  third => third.user)
-  // @JoinColumn()
+  @JoinColumn({
+    name: 'uid',
+    referencedColumnName: 'uid',
+  })
   third: Third[]
 }

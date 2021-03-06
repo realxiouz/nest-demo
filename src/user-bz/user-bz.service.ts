@@ -13,7 +13,10 @@ export class UserBzService {
 
   async find() {
     return this.userRepository.find({
-      relations: ['third']
+      relations: ['third'],
+      where: {
+        uid:234
+      }
     })
   }
 

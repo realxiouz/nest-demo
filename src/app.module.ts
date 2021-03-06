@@ -18,14 +18,14 @@ import { UserBzModule } from './user-bz/user-bz.module';
       useFactory() {
         return {
           uri: process.env.MONGO_RUI,
-          // pass: process.env.MONGO_PASS,
+          pass: process.env.MONGO_PASS,
         }
       }
     }),
     TypeOrmModule.forRootAsync({
       useFactory() {
         return {
-          type: 'mysql',
+          type: 'mariadb',
           host: process.env.MYSQL_HOST,
           port: parseInt(process.env.MYSQL_PORT),
           username: process.env.MYSQL_USER_NAME,

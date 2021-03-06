@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+import { CategoryService } from './category.service';
 import { ExpService } from './exp.service';
 import { ThirdService } from './third.service';
 import { UserBzService } from './user-bz.service';
@@ -10,6 +11,7 @@ export class UserBzController {
     private readonly userService: UserBzService,
     private readonly expService: ExpService,
     private readonly thirdService: ThirdService,
+    private readonly catService: CategoryService,
   ) {}
 
   @Get('test')
@@ -30,5 +32,15 @@ export class UserBzController {
   @Get('third-all')
   async thirdNew() {
     return await this.thirdService.find()
+  }
+
+  @Get('cat-all')
+  async catAll() {
+    return this.catService.getRoot()
+  }
+
+  @Get('cat41')
+  async cat41() {
+    return this.catService.getGoods()
   }
 }
