@@ -13,6 +13,7 @@ export class UserBzService {
 
   async find() {
     return this.userRepository.find({
+      select: ['token', 'name', 'avatar', 'uid'],
       relations: ['third'],
       where: {
         uid:234
@@ -20,5 +21,9 @@ export class UserBzService {
     })
   }
 
-  
+  // async testBuild() {
+  //   return await this.userRepository
+  //     .createQueryBuilder('user')
+  //     .
+  // }
 }

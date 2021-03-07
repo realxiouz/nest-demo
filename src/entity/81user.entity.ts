@@ -31,10 +31,10 @@ export class BzUser {
   @Column()
   avatar: string
 
-  @Column()
+  @Column({select: false})
   tel: string
 
-  @Column()
+  @Column({select: false})
   inviteCode: string
 
   @Column({
@@ -49,7 +49,7 @@ export class BzUser {
   })
   uid: number
 
-  @Column()
+  @Column({select: false})
   token: string
 
   @Column({
@@ -86,13 +86,13 @@ export class BzUser {
   })
   status: number
 
-  @Column()
+  @Column({select: false})
   last_login: number
 
-  @Column()
+  @Column({select: false})
   created_at: number
 
-  @Column()
+  @Column({select: false})
   updated_at: number
 
   @OneToMany(_ => Third,  third => third.user)

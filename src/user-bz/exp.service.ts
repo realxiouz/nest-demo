@@ -11,7 +11,18 @@ export class ExpService {
   ) {}
 
   async all() {
-    return await this.expRep.find({relations: ['user']})
+    return await this.expRep.find({
+      // select: ['type'],
+      relations: ['user'],
+      // join: {
+      //   alias: 'user',
+      //   leftJoinAndSelect: {
+      //     name: 'user.name'
+      //   }
+      // },
+      take: 10,
+      skip: 10,
+    })
   }
 
   async createExp() {

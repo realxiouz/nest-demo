@@ -18,7 +18,7 @@ import { UserBzModule } from './user-bz/user-bz.module';
       useFactory() {
         return {
           uri: process.env.MONGO_RUI,
-          pass: process.env.MONGO_PASS,
+          // pass: process.env.MONGO_PASS,
         }
       }
     }),
@@ -31,7 +31,8 @@ import { UserBzModule } from './user-bz/user-bz.module';
           username: process.env.MYSQL_USER_NAME,
           password: process.env.MYSQL_PASSWORD,
           entities: [ path.join(__dirname, './entity/*.entity{.ts,.js}') ],
-          database: '81_shop'
+          database: '81_shop',
+          logging: ['query']
         }
       }
     }),
