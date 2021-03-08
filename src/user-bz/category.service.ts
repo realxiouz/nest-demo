@@ -15,16 +15,27 @@ export class CategoryService {
     return await this.catRep.find({
       where: {
         pid: 0,
+        is_show: 1,
       },
       relations: ['sub']
     })
   }
 
+  async getRootByQb() {
+   return await this.catRep.createQueryBuilder('cat')
+    .leftJoinAndSelect("cat.sub", "category")
+    .leftJoinAndSelect('cat.parent', '')
+    .where('cat.is_show=:is_show', {is_show: 1})
+    .andWhere('cat.pid=:pid', {pid: 0})
+    .andWhere('category.is_show=:is_show', {is_show: 1})
+    .getMany()
+  }
+
   async getGoods() {
     return await this.catRep.findAndCount({
-      where: {
-        id: 41,
-      },
+      // where: {
+      //   id: 41,
+      // },
       relations: ['goods'],
     })
   }

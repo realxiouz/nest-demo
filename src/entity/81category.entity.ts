@@ -20,6 +20,9 @@ export class Category {
   })
   pid: number
 
+  @Column()
+  is_show: number
+
   @OneToMany(_ => Category, category => category.parent)
   @JoinColumn({
     name: 'id',

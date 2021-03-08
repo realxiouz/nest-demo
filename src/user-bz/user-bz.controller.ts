@@ -3,6 +3,7 @@ import { CategoryService } from './category.service';
 import { ExpService } from './exp.service';
 import { ThirdService } from './third.service';
 import { UserBzService } from './user-bz.service';
+import { CartService } from './cart.service';
 
 @Controller('user-bz')
 export class UserBzController {
@@ -12,6 +13,7 @@ export class UserBzController {
     private readonly expService: ExpService,
     private readonly thirdService: ThirdService,
     private readonly catService: CategoryService,
+    private readonly cartService: CartService,
   ) {}
 
   @Get('test')
@@ -23,6 +25,8 @@ export class UserBzController {
   async log() {
     return await this.expService.all()
   }
+
+
 
   @Get('exp-new')
   async new() {
@@ -39,8 +43,18 @@ export class UserBzController {
     return this.catService.getRoot()
   }
 
+  @Get('cat-qb')
+  async catAllBYQb() {
+    return this.catService.getRootByQb()
+  }
+
   @Get('cat41')
   async cat41() {
     return this.catService.getGoods()
+  }
+
+  @Get('cart')
+  async cart() {
+    return this.cartService.getCartByUid()
   }
 }
