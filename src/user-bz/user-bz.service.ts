@@ -11,12 +11,12 @@ export class UserBzService {
     private readonly userRepository: Repository<BzUser>
   ){}
 
-  async find() {
+  async basicInfo(uid) {
     return this.userRepository.find({
       select: ['token', 'name', 'avatar', 'uid'],
       relations: ['third'],
       where: {
-        uid:234
+        uid
       }
     })
   }

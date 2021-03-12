@@ -12,17 +12,25 @@ export class ExpService {
 
   async all() {
     return await this.expRep.find({
-      // select: ['type'],
       relations: ['user'],
-      // join: {
-      //   alias: 'user',
-      //   leftJoinAndSelect: {
-      //     name: 'user.name'
-      //   }
-      // },
+      // select: ['id',],
       take: 10,
       skip: 10,
     })
+  }
+
+  async allByQb(uid) {
+    return await this.expRep.createQueryBuilder('exp')
+      .leftJoinAndSelect('exp.user', 'user')
+      .select([
+        'exp.type',
+        'user.name',
+        'user.last_login'
+      ])
+      .where({
+        uid,
+      })
+      .getMany()
   }
 
   async createExp() {

@@ -14,7 +14,7 @@ async function bootstrap() {
   const dogDocument = SwaggerModule.createDocument(app, secondOptions);
   SwaggerModule.setup('api-doc', app, dogDocument);
 
-  app.useGlobalFilters(new GlobalFilter())
+  // app.useGlobalFilters(new GlobalFilter())
 
   await app.listen(3000);
 }

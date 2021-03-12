@@ -17,14 +17,14 @@ export class CategoryService {
         pid: 0,
         is_show: 1,
       },
-      relations: ['sub']
+      relations: ['sub', 'parent']
     })
   }
 
   async getRootByQb() {
    return await this.catRep.createQueryBuilder('cat')
     .leftJoinAndSelect("cat.sub", "category")
-    .leftJoinAndSelect('cat.parent', '')
+    .leftJoinAndSelect('cat.parent', 'parent')
     .where('cat.is_show=:is_show', {is_show: 1})
     .andWhere('cat.pid=:pid', {pid: 0})
     .andWhere('category.is_show=:is_show', {is_show: 1})

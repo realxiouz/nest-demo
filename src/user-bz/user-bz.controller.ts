@@ -1,11 +1,13 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { ExpService } from './exp.service';
 import { ThirdService } from './third.service';
 import { UserBzService } from './user-bz.service';
 import { CartService } from './cart.service';
+import { ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 
-@Controller('user-bz')
+@Controller('bz')
+@ApiTags('81兵站')
 export class UserBzController {
 
   constructor(
@@ -16,14 +18,27 @@ export class UserBzController {
     private readonly cartService: CartService,
   ) {}
 
-  @Get('test')
-  async allUser() {
-    return await this.userService.find()
+  @Get('basicInfo')
+  @ApiQuery({
+    name: 'id',
+    description: 'uid'
+  })
+  async basicInfo(@Query('id') uid=234) {
+    return await this.userService.basicInfo(uid)
   }
 
   @Get('exp')
   async log() {
     return await this.expService.all()
+  }
+
+  @Get('expByUid/:uid')
+  @ApiParam({
+    name: 'uid',
+    description: 'user id'
+  })
+  async expByQb(@Param('uid') uid) {
+    return await this.expService.allByQb(uid)
   }
 
 
