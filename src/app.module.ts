@@ -11,6 +11,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import * as path from 'path';
 // import { mongoose } from '@typegoose/typegoose' 
 import { UserBzModule } from './user-bz/user-bz.module';
+import { PushModule } from './push/push.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -18,7 +19,7 @@ import { UserBzModule } from './user-bz/user-bz.module';
       useFactory() {
         return {
           uri: process.env.MONGO_RUI,
-          pass: process.env.MONGO_PASS,
+          // pass: process.env.MONGO_PASS,
         }
       }
     }),
@@ -40,6 +41,7 @@ import { UserBzModule } from './user-bz/user-bz.module';
     AuthModule,
     LogModule,
     UserBzModule,
+    PushModule,
   ],
   providers: [AppService],
   controllers: [
